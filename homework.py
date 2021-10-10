@@ -4,9 +4,9 @@ import datetime as dt
 class Record:
     """Класс записи."""
 
-    def __init__(self, amount, comment, date=None) -> None:
-        self.amount = amount
-        self.comment = comment
+    def __init__(self, amount: int, comment: str, date: str =None) -> None:
+        self.amount: int = amount
+        self.comment: str = comment
         if date is not None:
             self.moment = dt.datetime.strptime(date, '%d.%m.%Y')
             self.date = self.moment.date()
