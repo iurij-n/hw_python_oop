@@ -66,8 +66,8 @@ class CaloriesCalculator(Calculator):
 class CashCalculator(Calculator):
     """Калькулятор денег."""
 
-    USD_RATE: float = 71.88
-    EURO_RATE: float = 83.14
+    USD_RATE: float = 71.85
+    EURO_RATE: float = 83.00
     A_C: Dict = {
         'usd': ['USD', USD_RATE],
         'eur': ['Euro', EURO_RATE],
@@ -93,7 +93,7 @@ class CashCalculator(Calculator):
                 currency_name=self.A_C[currency][0])
 
 if __name__ == "__main__":
-    cash_calculator = CashCalculator(189)
+    cash_calculator = CashCalculator(0)
 
     cash_calculator.add_record(Record(amount=1186,
                                       comment='Кусок тортика. И ещё один.',
@@ -109,4 +109,4 @@ if __name__ == "__main__":
 
     cash_calculator.get_today_stats()
     cash_calculator.get_week_stats()
-    print(cash_calculator.get_today_cash_remained('rub'))
+    print(cash_calculator.get_today_cash_remained('eur'))
