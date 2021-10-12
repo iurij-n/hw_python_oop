@@ -35,8 +35,8 @@ class Calculator:
         """Статистика за день."""
         self.moment = dt.datetime.now()
         self.cur_date = self.moment.date()
-        return sum([self.records[i].amount for i in range(len(self.records))
-                   if self.cur_date == self.records[i].date])
+        return sum(self.records[i].amount for i in range(len(self.records))
+                   if self.cur_date == self.records[i].date)
 
     def get_week_stats(self) -> int:
         """Статистика за неделю."""
@@ -77,8 +77,8 @@ class CashCalculator(Calculator):
 
     POSITIVE_BALANCE: str = 'На сегодня осталось {balance} {currency_name}'
     ZERO_BALANCE: str = 'Денег нет, держись'
-    NEGATIVE_BALANCE: str = 'Денег нет, держись: твой \
-долг - {balance} {currency_name}'
+    NEGATIVE_BALANCE: str = ('Денег нет, держись: '
+                             'твой долг -{balance} {currency_name}')
 
     def get_today_cash_remained(self, currency: str) -> str:
         """Определяем сколько еще денег можно потратить сегодня."""
@@ -95,8 +95,8 @@ class CashCalculator(Calculator):
 
 
 if __name__ == "__main__":
-    cash_calculator = CashCalculator(0)
 
+    cash_calculator = CashCalculator(0)
     cash_calculator.add_record(Record(amount=1186,
                                       comment='Кусок тортика. И ещё один.',
                                       date='24.02.2019'))
