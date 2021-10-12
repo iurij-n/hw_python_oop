@@ -84,14 +84,14 @@ class CashCalculator(Calculator):
         """Определяем сколько еще денег можно потратить сегодня."""
         if self.difference() > 0:
             return (self.POSITIVE_BALANCE.format(balance=str(round(
-                    self.difference()/self.A_C[currency][1], 2)),
-                    currency_name=self.A_C[currency][0]))
+                self.difference() / self.A_C[currency][1], 2)),
+                currency_name=self.A_C[currency][0]))
         if self.difference() == 0:
             return self.ZERO_BALANCE
         if self.difference() < 0:
             return (self.NEGATIVE_BALANCE.format(balance=str(round(
-                    abs(self.difference()/self.A_C[currency][1]), 2)),
-                    currency_name=self.A_C[currency][0]))
+                abs(self.difference() / self.A_C[currency][1]), 2)),
+                currency_name=self.A_C[currency][0]))
 
 
 if __name__ == "__main__":
