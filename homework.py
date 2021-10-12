@@ -5,7 +5,8 @@ from typing import Optional, List, Dict
 class Record:
     """Класс записи."""
 
-    def __init__(self, amount: int, comment: str, date: Optional[str] = None) -> None:
+    def __init__(self, amount: int, comment: str, 
+                 date: Optional[str] = None) -> None:
         """Конструктор класса."""
         self.amount: int = amount
         self.comment: str = comment
@@ -20,11 +21,11 @@ class Record:
 
 class Calculator:
     """Родительский класс."""
+
     def __init__(self, limit: int) -> None:
         """Конструктор класса."""
         self.records: List = []
         self.limit: int = limit
-
 
     def add_record(self, record) -> None:
         """Добавляет новую запись."""
@@ -45,7 +46,7 @@ class Calculator:
                    if (self.cur_date - dt.timedelta(days=7)
                    < self.records[i].date
                    <= self.cur_date)])
-    
+
     def difference(self) -> int:
         """Сравниваем дневную статистик с лимитом"""
         return self.limit - self.get_today_stats()
@@ -66,8 +67,8 @@ class CaloriesCalculator(Calculator):
 class CashCalculator(Calculator):
     """Калькулятор денег."""
 
-    USD_RATE: float = 71.85
-    EURO_RATE: float = 83.00
+    USD_RATE: float = 60.0
+    EURO_RATE: float = 70.0
     A_C: Dict = {
         'usd': ['USD', USD_RATE],
         'eur': ['Euro', EURO_RATE],
@@ -81,16 +82,17 @@ class CashCalculator(Calculator):
 
     def get_today_cash_remained(self, currency: str) -> str:
         """Определяем сколько еще денег можно потратить сегодня."""
-        if self.difference() > 0:
+        if self.difference()>0:
             return self.POSITIVE_BALANCE.format(balance = str(round(
-                self.difference() / self.A_C[currency][1], 2)), 
-                currency_name=self.A_C[currency][0])
-        if self.difference() == 0:
+                   self.difference() / self.A_C[currency][1], 2)), 
+                   currency_name=self.A_C[currency][0])
+        if self.difference()==0:
             return self.ZERO_BALANCE
-        if self.difference() < 0:
+        if self.difference()<0:
             return self.NEGATIVE_BALANCE.format(balance = str(round(
-                abs(self.difference() / self.A_C[currency][1]), 2)), 
-                currency_name=self.A_C[currency][0])
+                   abs(self.difference() / self.A_C[currency][1]), 2)), 
+                   currency_name=self.A_C[currency][0])
+
 
 if __name__ == "__main__":
     cash_calculator = CashCalculator(0)
